@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CrearEPSController">
+   <children>
+      <Label layoutX="66.0" layoutY="100.0" text="EPS">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="142.0" text="Activos">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFldName" layoutX="102.0" layoutY="96.0" promptText="Ingrese el nombre de la EPS" />
+      <TextField fx:id="txtFldActivos" layoutX="102.0" layoutY="138.0" promptText="Ingrese los activos" />
+      <Button layoutX="102.0" layoutY="191.0" mnemonicParsing="false" onAction="#createEPS" text="Save">
+         <font>
+            <Font name="Wingdings 2" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

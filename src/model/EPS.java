@@ -3,17 +3,53 @@ package model;
 import java.util.ArrayList;
 
 public class EPS {
+	
+	private Administrador admin;
 
 	private Paciente raizPaciente;
+	
+	private String nombre;
 
 	private double caraterEconomico;
 
 	private ArrayList<IPS> ipses;
 
-	public EPS(double caracterEconomico) {
+	public EPS(String nombre, double caracterEconomico) {
+		this.nombre = nombre;
 		this.caraterEconomico = caracterEconomico;
 		this.ipses = new ArrayList<IPS>();
 	}
+	
+	
+	public Administrador getAdmin() {
+		return admin;
+	}
+	
+	public void setAdmin(Administrador admin) {
+		this.admin = admin;
+	}
+	
+	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public double getCaraterEconomico() {
+		return caraterEconomico;
+	}
+
+
+	public void setCaraterEconomico(double caraterEconomico) {
+		this.caraterEconomico = caraterEconomico;
+	}
+
 
 	/**
 	 * 
