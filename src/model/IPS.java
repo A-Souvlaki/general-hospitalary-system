@@ -1,15 +1,37 @@
 package model;
 
-public abstract class IPS {
+import java.util.Comparator;
+
+public abstract class IPS implements Comparable<IPS> {
+	
+	
+	public final static String PUBLICO = "Publico";
+	public final static String PRIVADO = "Privado";
+	public final static String MIXTO = "Mixto";
 	
 	private double nit;
 	private String nombre;
 	private String direccion;
+	private String tipo;
 	
-	public IPS(double nit, String nombre, String direccion) {
+	private Medico primero;
+	
+	private int nivel;
+	
+	public IPS(double nit, String nombre, String direccion, String tipo, int nivel) {
 		this.nit = nit;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.tipo = tipo;
+		this.nivel = nivel;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
 	}
 
 	public double getNit() {
@@ -24,14 +46,34 @@ public abstract class IPS {
 		return direccion;
 	}
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Medico getPrimero() {
+		return primero;
+	}
+
+	public void setPrimero(Medico primero) {
+		this.primero = primero;
+	}
+
 	@Override
 	public String toString() {
-		String mensaje = "";
-		mensaje += "\nIPS.";
-		mensaje += "\nRegistro NIT: " + nit;
-		mensaje += "\nNombre: " + nombre;
-		mensaje += "\nDireccion: " + direccion;
-		return mensaje;
+		return "IPS [nit=" + nit + ", nombre=" + nombre + ", direccion=" + direccion + ", tipo=" + tipo + ", primero="
+				+ primero + ", nivel=" + nivel + "]";
 	}
+
+	public int compareByNombre(String n) {
+		return nombre.compareTo(n);
+	}
+	
+	
+	
+	
 
 }
