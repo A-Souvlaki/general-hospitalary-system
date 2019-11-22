@@ -44,9 +44,7 @@ public class LoginController implements Initializable {
 		try {
 			if (validarInformacionAdmin()) {
 				try {
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(getClass().getResource(("MenuAdministrador.fxml")));
-					Parent root = (Parent) loader.load();
+					Parent root = FXMLLoader.load(getClass().getResource("/application/menuAdmin.fxml"));
 					Scene scene = new Scene(root);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					stage.setScene(scene);
@@ -69,14 +67,10 @@ public class LoginController implements Initializable {
 			alert.setHeaderText(null);
 			alert.setContentText("Password Incorrect, please try again");
 			alert.showAndWait();
-		} catch (Exception e) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error xd");
-			alert.setHeaderText(null);
-			alert.setContentText("An error has ocurred, please check your actions");
-			alert.showAndWait();
-		}
-
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		} 
 	}
 
 
@@ -87,7 +81,7 @@ public class LoginController implements Initializable {
 		if (textField.getText().isEmpty()) {
 			valid = false;
 			throw new EmptyFieldException("El usuario es el ID del manager");
-		} else if (!(textField.getText().equals(String.valueOf(Main.getEPS().getAdmin().getId())))) {
+		} else if (!(textField.getText().equals(String.valueOf(Main.getEPS().getAdmin().getName())))) {
 			valid = false;
 			throw new Exception("error");
 		}

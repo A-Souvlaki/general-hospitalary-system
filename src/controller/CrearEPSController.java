@@ -71,8 +71,10 @@ public class CrearEPSController {
 		if (activos < 1000000000) {
 			throw new MinimunActivesException(
 					"El valor de activos no es valido para la iniciacion del sistema de una EPS");
+		}else {
+			Main.getEPS().setCaraterEconomico(activos);
 		}
-		Main.getEPS().setCaraterEconomico(activos);
+		
 
 	}
 

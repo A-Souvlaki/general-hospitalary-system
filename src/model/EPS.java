@@ -216,5 +216,15 @@ public class EPS {
 		return msg;
 	}
 	
+	
+	public ArrayList<IPS> obtenerClinicasParaMostrar(){
+		ArrayList<IPS> clinicas = new ArrayList<IPS>();
+		for (int i = 0; i < ipses.size(); i++) {
+			if (ipses.get(i) instanceof Clinica ) {
+				clinicas.add(ipses.get(i));
+			}
+		}
+		return clinicas;
+	}
 
 }

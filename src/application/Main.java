@@ -20,7 +20,7 @@ public class Main extends Application {
 		try {
 			Parent root;
 			if(eps.getAdmin() == null) {
-				root = FXMLLoader.load(getClass().getResource("register.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/application/register.fxml"));
 			}else {
 				root = FXMLLoader.load(getClass().getResource("login.fxml"));
 			}
