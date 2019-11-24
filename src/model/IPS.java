@@ -20,10 +20,9 @@ public abstract class IPS implements Comparable<IPS> {
 	private StringProperty nombre;
 	private StringProperty direccion;
 	private StringProperty tipo;
-	
-	private Medico primero;
-	
 	private IntegerProperty nivel;
+	
+	private Medico primerMedico;
 	
 	public IPS(int nit, String nombre, String direccion, String tipo, int nivel) {
 		this.nit = new SimpleIntegerProperty(nit);
@@ -31,6 +30,7 @@ public abstract class IPS implements Comparable<IPS> {
 		this.direccion = new SimpleStringProperty(direccion);
 		this.tipo = new SimpleStringProperty(tipo);
 		this.nivel = new SimpleIntegerProperty(nivel);
+		primerMedico = null;
 	}
 
 	public int getNivel() {
@@ -61,28 +61,67 @@ public abstract class IPS implements Comparable<IPS> {
 		this.tipo.set(tipo);;
 	}
 
-	public Medico getPrimero() {
-		return primero;
+	public Medico getPrimerMedico() {
+		return primerMedico;
 	}
 
-	public void setPrimero(Medico primero) {
-		this.primero = primero;
+	public void setPrimerMedico(Medico medico) {
+		primerMedico = medico;
 	}
 
 	@Override
 	public String toString() {
 		return "IPS [nit=" + nit + ", nombre=" + nombre + ", direccion=" + direccion + ", tipo=" + tipo + ", primero="
-				+ primero + ", nivel=" + nivel + "]";
+				+ primerMedico + ", nivel=" + nivel + "]";
 	}
 
 	public int compareByNombre(String n) {
 		return this.nombre.get().compareTo(n);
 	}
-
-
 	
+	public void agregarMedico(String nombre, String apellido, int edad, String licencia, String especialidad) {
+		Medico medico = new MedicoEspecialista(nombre, apellido, edad, licencia, especialidad);
+		if( primerMedico == null ) {
+			primerMedico = medico;
+		}else {
+			Medico tmp = primerMedico;
+			while( tmp.getSiguiente() != null ) {
+				tmp = tmp.getSiguiente();
+			}
+			tmp.setSiguiente(medico);
+		}
+	}
 	
+	public void agregarMedico(String nombre, String apellido, int edad, String licencia, int numEstudiantes) {
+		Medico medico = new MedicoGeneral(nombre, apellido, edad, licencia, numEstudiantes);
+		if( primerMedico == null ) {
+			primerMedico = medico;
+		}else {
+			Medico tmp = primerMedico;
+			while( tmp.getSiguiente() != null ) {
+				tmp = tmp.getSiguiente();
+			}
+			tmp.setSiguiente(medico);
+		}
+	}
 	
-	
+	public void eliminarMedico(String licencia) {
+		Medico anterior = null;
+		Medico siguiente = null;
+		Medico tmp = primerMedico;
+		if( tmp.getLicencia().equalsIgnoreCase(licencia) ) {
+			siguiente = tmp.getSiguiente();
+			primerMedico = siguiente;
+		}else {
+			while( tmp.getSiguiente() != null ) {
+				if( licencia.equalsIgnoreCase( tmp.getSiguiente().getLicencia() ) ) {
+					anterior = tmp;
+					siguiente = tmp.getSiguiente();
+				}
+				tmp = tmp.getSiguiente();
+			}
+			anterior.setSiguiente(siguiente.getSiguiente());
+		}
+	}
 
 }

@@ -10,13 +10,12 @@ public class PuestoDeSalud extends IPS{
 	private StringProperty vacunas;
 	private StringProperty farmacia;
 
-	public PuestoDeSalud(int nit, String nombre, String direccion,String tipo,int nivel,String jefe_enfermeros,String jefe_laboratorio, String vacunas,String farmacia) {
+	public PuestoDeSalud(int nit, String nombre, String direccion, String tipo, int nivel, String jefe_enfermeros, String jefe_laboratorio, String vacunas, String farmacia) {
 		super(nit, nombre, direccion,tipo,nivel);
 		this.jefe_enfermeros = new SimpleStringProperty(jefe_enfermeros);
 		this.jefe_laboratorio = new SimpleStringProperty(jefe_laboratorio);
 		this.vacunas = new SimpleStringProperty(vacunas);
 		this.farmacia = new SimpleStringProperty(farmacia);
-		
 	}
 
 	public String getJefe_enfermeros() {
@@ -63,7 +62,5 @@ public class PuestoDeSalud extends IPS{
 	public int compareJefe_l(PuestoDeSalud o) {
 		return jefe_laboratorio.get().compareTo(o.getJefe_laboratorio());
 	}
-	
-	
-	
+
 }

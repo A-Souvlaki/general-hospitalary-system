@@ -13,7 +13,7 @@ public class Clinica extends IPS{
 	
 	private StringProperty especialidad;
 	
-	public Clinica(int nit, String nombre, String direccion,String tipo,int nivel,String especialidad) {
+	public Clinica(int nit, String nombre, String direccion, String tipo, int nivel, String especialidad) {
 		super(nit, nombre, direccion,tipo,nivel);
 		this.especialidad = new SimpleStringProperty(especialidad);
 		servicios = new ArrayList<String>();
@@ -27,7 +27,7 @@ public class Clinica extends IPS{
 		this.servicios = servicios;
 	}
 
-	public String isEspecialidad() {
+	public String getEspecialidad() {
 		return especialidad.get();
 	}
 
@@ -38,13 +38,11 @@ public class Clinica extends IPS{
 	@Override
 	public String toString() {
 		return super.toString();
-		
 	}
 	
 	@Override
 	public int compareTo(IPS o) {
 		return super.getNombre().compareTo(o.getNombre());
 	}
-	
 	
 }

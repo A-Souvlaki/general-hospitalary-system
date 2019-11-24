@@ -8,17 +8,19 @@ public class EPS {
 
 	private Administrador admin;
 
-	private Paciente raizPaciente;
-
 	private String nombre;
-
 	private double caraterEconomico;
+	
+	private Paciente pacienteRaiz;
+	private Medicamento medicamentoRaiz;
 
 	private ArrayList<IPS> ipses;
 
 	public EPS(String nombre, double caracterEconomico) {
 		this.nombre = nombre;
 		this.caraterEconomico = caracterEconomico;
+		pacienteRaiz = null;
+		medicamentoRaiz = null;
 		this.ipses = new ArrayList<IPS>();
 	}
 
@@ -45,6 +47,22 @@ public class EPS {
 	public void setCaraterEconomico(double caraterEconomico) {
 		this.caraterEconomico = caraterEconomico;
 	}
+	
+	public void setPacienteRaiz(Paciente paciente) {
+		pacienteRaiz = paciente;
+	}
+	
+	public Paciente getPacienteRaiz() {
+		return pacienteRaiz;
+	}
+	
+	public void setMedicamentoRaiz(Medicamento medicamento) {
+		medicamentoRaiz = medicamento;
+	}
+	
+	public Medicamento getMedicamentoRaiz() {
+		return medicamentoRaiz;
+	}
 
 	// Revisa los metodos del controller de Hospital para ver como se usa xD
 	/**
@@ -61,7 +79,7 @@ public class EPS {
 	 * @param acreditado    it indicates if the institution is accredited
 	 */
 	public void agregarIPS(int nit, String nombre, String direccion, String tipo, int nivel, String representante,
-			String universitario, String acreditado) {
+		String universitario, String acreditado) {
 		Hospital h = new Hospital(nit, nombre, direccion, tipo, nivel, representante, universitario, acreditado);
 		ipses.add(h);
 	}
