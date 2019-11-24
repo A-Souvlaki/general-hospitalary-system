@@ -1,64 +1,73 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Hospital extends IPS{
 
 	
-	private String representante;
-	private boolean universitario;
-	private boolean acreditado;
-	private int numeroMedicos;
+	private StringProperty representante;
+	private StringProperty universitario;
+	private StringProperty acreditado;
 
-	public Hospital(double nit, String nombre, String direccion,String tipo,int nivel,String representante,boolean universitario,boolean acreditado) {
+
+	public Hospital(int nit, String nombre, String direccion,String tipo,int nivel,String representante,String universitario,String acreditado) {
 		super(nit, nombre, direccion,tipo,nivel);
-		this.representante = representante;
-		this.universitario = universitario;
-		this.acreditado = false;
-		this.numeroMedicos = 0;
+		this.representante = new SimpleStringProperty(representante);
+		this.universitario = new SimpleStringProperty(universitario);
+		this.acreditado = new SimpleStringProperty(acreditado);
+
 		
 	}
 
 	public String getRepresentante() {
-		return representante;
+		return representante.get();
 	}
 
 	public void setRepresentante(String representante) {
-		this.representante = representante;
+		this.representante.set(representante);
 	}
+	
+	
 
-	public boolean isUniversitario() {
-		return universitario;
-	}
-
-	public void setUniversitario(boolean universitario) {
-		this.universitario = universitario;
-	}
-
-	public boolean isAcreditado() {
-		return acreditado;
-	}
-
-	public void setAcreditado(boolean acreditado) {
-		this.acreditado = acreditado;
-	}
-
-	public int getNumeroMedicos() {
-		return numeroMedicos;
-	}
-
-	public void setNumeroMedicos(int numeroMedicos) {
-		this.numeroMedicos = numeroMedicos;
-	}
 
 	@Override
 	public String toString() {
-		return "Hospital [representante=" + representante + ", universitario=" + universitario + ", numeroMedicos="
-				+ numeroMedicos + "]";
+		return "Hospital [representante=" + representante + ", universitario=" + universitario + "]";
+	}
+
+	
+	public int compareTo(Hospital o) {
+		return representante.get().compareTo(o.getRepresentante());
+	}
+	
+	public int compareByName(String n) {
+		return super.getNombre().compareTo(n);
+	}
+
+	public String getUniversitario() {
+		return universitario.get();
+	}
+
+	public void setUniversitario(String universitario) {
+		this.universitario.set(universitario);
+	}
+
+	public String getAcreditado() {
+		return acreditado.get();
+	}
+
+	public void setAcreditado(String acreditado) {
+		this.acreditado.set(acreditado);
 	}
 
 	@Override
 	public int compareTo(IPS o) {
-		return super.getNombre().compareTo(o.getNombre());
+		// TODO Auto-generated method stub
+		return 0;
 	}
+	
+	
 
 
 	

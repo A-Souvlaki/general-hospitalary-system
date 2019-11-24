@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import application.Main;
 import excepciones.EmptyFieldException;
 import excepciones.FieldTypedIncorrectly;
-import excepciones.IncorrectPassWordException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,19 +17,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import model.Clinica;
-import model.IPS;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class RegistrarClinicaController implements Initializable{
+public class RegistrarPuestoDeSaludController implements Initializable {
 	
 	ObservableList<String> listA = FXCollections.observableArrayList();
 	ObservableList<String> listB = FXCollections.observableArrayList();
 	ObservableList<String> listC = FXCollections.observableArrayList();
+	ObservableList<String> listD = FXCollections.observableArrayList();
 	
 	@FXML
 	private TextField nit;
@@ -48,7 +45,16 @@ public class RegistrarClinicaController implements Initializable{
 	private ChoiceBox<String> level;
 	
 	@FXML
-	private ChoiceBox<String> especialidad;
+	private TextField nurse;
+	
+	@FXML
+	private TextField laboratory;
+	
+	@FXML
+	private ChoiceBox<String> vacum;
+	
+	@FXML
+	private ChoiceBox<String> pharmacy;
 	
 
 	
@@ -56,8 +62,8 @@ public class RegistrarClinicaController implements Initializable{
 	public void addClinic(ActionEvent event) {
 		try {
 			if (validateClinicData()) {
-				dataClinic();
-				Parent root = FXMLLoader.load(getClass().getResource("/application/clinica.fxml"));
+				dataPSalud();
+				Parent root = FXMLLoader.load(getClass().getResource("/application/pSalud.fxml"));
 				Scene scene = new Scene(root);
 				Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 				stage.setScene(scene);
@@ -82,7 +88,7 @@ public class RegistrarClinicaController implements Initializable{
 	}
 	
 	
-	public void dataClinic() {
+	public void dataPSalud() {
 		String nitA = nit.getText();
 		int n = Integer.parseInt(nitA);
 		String nameA = name.getText();
@@ -90,8 +96,11 @@ public class RegistrarClinicaController implements Initializable{
 		String typ = tipe.getValue();
 		String lvl = level.getValue();
 		int l = Integer.parseInt(lvl);
-		String espe = especialidad.getValue();
-		Main.getEPS().agregarIPS(n, nameA, adrss, typ,l,espe);
+		String jefe_E = nurse.getText();
+		String jefe_L = laboratory.getText();
+		String vac = vacum.getValue();
+		String pharm = pharmacy.getValue();
+		Main.getEPS().agregarIPS(n, nameA, adrss, typ,l,jefe_E,jefe_L,vac,pharm);
 	}
 	
 	
@@ -118,6 +127,16 @@ public class RegistrarClinicaController implements Initializable{
 			isValid = false;
 			throw new EmptyFieldException("Direccion");
 		} 
+		
+		if (nurse.getText().isEmpty()) {
+			isValid = false;
+			throw new EmptyFieldException("Direccion");
+		} 
+		
+		if (laboratory.getText().isEmpty()) {
+			isValid = false;
+			throw new EmptyFieldException("Direccion");
+		} 
 
 		// 
 		if (tipe.getValue() == null) {
@@ -130,7 +149,12 @@ public class RegistrarClinicaController implements Initializable{
 			throw new EmptyFieldException("nivel");
 		} 
 		
-		if (especialidad.getValue() == null) {
+		if (vacum.getValue() == null) {
+			isValid = false;
+			throw new EmptyFieldException("especialidad");
+		} 
+		
+		if (pharmacy.getValue() == null) {
 			isValid = false;
 			throw new EmptyFieldException("especialidad");
 		} 
@@ -163,10 +187,17 @@ public class RegistrarClinicaController implements Initializable{
 
 	}
 	
-	public void createBoxEspecialidad() {
+	public void createBoxVacum() {
 		listC.remove(listC);
-		listC.addAll("Cardiologia","Otorrinolaringologia","Estetica","Materno","Osteoporosis");
-		especialidad.getItems().addAll(listC);
+		listC.addAll("Si","No");
+		vacum.getItems().addAll(listC);
+
+	}
+	
+	public void createBoxPharmacy() {
+		listD.remove(listD);
+		listD.addAll("Si","No");
+		pharmacy.getItems().addAll(listC);
 
 	}
 
@@ -174,9 +205,8 @@ public class RegistrarClinicaController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		createBoxType();
 		createBoxLevel();
-		createBoxEspecialidad();
+		createBoxVacum();
+		createBoxPharmacy();
 		
 	}
-	
-	
 }

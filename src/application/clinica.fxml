@@ -5,28 +5,27 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClinicaController">
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClinicaController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="374.0" prefWidth="401.0">
+      <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="484.0">
          <children>
             <MenuBar prefHeight="8.0" prefWidth="360.0">
                <menus>
                   <Menu mnemonicParsing="false" text="Ordenar">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Codigo" />
-                        <MenuItem mnemonicParsing="false" text="Precio" />
+                        <MenuItem fx:id="sortNit" mnemonicParsing="false" text="Nit" />
+                        <MenuItem fx:id="sortNombre" mnemonicParsing="false" text="Nombre" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Buscar">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Codigo" />
+                        <MenuItem mnemonicParsing="false" onAction="#searchByNit" text="Nit" />
                      </items>
                   </Menu>
                </menus>
@@ -36,16 +35,15 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="listBills" prefHeight="277.0" prefWidth="387.0" />
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="360.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#goBackAdministratorMenu" text="Regresar" />
                   <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" text="Detalle" />
+                  <Button fx:id="delete" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Borrar" />
                   <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" onAction="#refresh" text="Actualizar" />
-                  <ImageView fitHeight="68.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="61.0" text="Agregar" />
+                  <Button mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="66.0" text="Agregar" />
+                  <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="ver" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Ver" />
                </children>
             </HBox>
          </children>

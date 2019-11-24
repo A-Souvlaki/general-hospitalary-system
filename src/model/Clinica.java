@@ -2,15 +2,20 @@ package model;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Clinica extends IPS{
 	
 	private ArrayList<String> servicios;
 	
-	private boolean especialidad;
+	private StringProperty especialidad;
 	
-	public Clinica(double nit, String nombre, String direccion,String tipo,int nivel,boolean especialidad) {
+	public Clinica(int nit, String nombre, String direccion,String tipo,int nivel,String especialidad) {
 		super(nit, nombre, direccion,tipo,nivel);
-		this.especialidad = especialidad;
+		this.especialidad = new SimpleStringProperty(especialidad);
 		servicios = new ArrayList<String>();
 	}
 
@@ -22,17 +27,18 @@ public class Clinica extends IPS{
 		this.servicios = servicios;
 	}
 
-	public boolean isEspecialidad() {
-		return especialidad;
+	public String isEspecialidad() {
+		return especialidad.get();
 	}
 
-	public void setEspecialidad(boolean especialidad) {
-		this.especialidad = especialidad;
+	public void setEspecialidad(String especialidad) {
+		this.especialidad.set(especialidad);;
 	}
 
 	@Override
 	public String toString() {
-		return "Clinica [servicios=" + servicios + ", especialidad=" + especialidad + "]";
+		return super.toString();
+		
 	}
 	
 	@Override
