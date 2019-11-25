@@ -27,7 +27,11 @@ public class Main extends Application {
 			//init();
 			Parent root;
 			if(eps.getAdmin() == null) {
-				root = FXMLLoader.load(getClass().getResource("/application/hospital.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/application/menuAdmin.fxml"));
+				eps.cargarAltoNivel("files\\altoNivel.csv");
+				eps.cargarComun("files\\comun.csv");
+				eps.cargarSubsidiados("files\\subsi.csv");
+				eps.cargarContributivos("files\\contri.csv");
 			}else {
 				root = FXMLLoader.load(getClass().getResource("login.fxml"));
 			}
@@ -60,16 +64,16 @@ public class Main extends Application {
 	}
 	
 	public void init(){
-		File market = new File("files\\eps.dat");
+		File market = new File("/files/eps.dat");
 		if(market.exists()){
 			System.out.println("Existo");
-			Main.setEPS(file.loadMarketData("files\\eps.dat"));
+			Main.setEPS(file.loadMarketData("/files/eps.dat"));
 		}
 	}
 	
 	public void closeProgram(){
 		try {
-			file.saveMarketData("files\\eps.dat", Main.getEPS());
+			file.saveMarketData("/files/eps.dat", Main.getEPS());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

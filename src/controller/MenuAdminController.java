@@ -66,7 +66,7 @@ public class MenuAdminController {
     void openMedicinesWindow(ActionEvent event) {
     	try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource(("Distribuidores.fxml")));
+			loader.setLocation(getClass().getResource(("/application/medicamentos.fxml")));
 			Parent root = (Parent) loader.load();
 			Scene scene = new Scene(root);
 			Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -81,9 +81,7 @@ public class MenuAdminController {
     @FXML
     void openAfiliatesWindow(ActionEvent event) {
     	try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource(("Inventory.fxml")));
-			Parent root = (Parent) loader.load();
+    		Parent root = FXMLLoader.load(getClass().getResource("/application/pacientes.fxml"));
 			Scene scene = new Scene(root);
 			Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			stage.setScene(scene);

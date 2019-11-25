@@ -1,6 +1,11 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import excepciones.NotFoundException;
 
@@ -8,9 +13,13 @@ public class EPS {
 
 	private Administrador admin;
 
-	private Paciente raizPaciente;
+	private PacienteSubsidiado raizPacienteS;
+	
+	private PacienteContributario raizPacienteC;
 
-	private Medico primero;
+	private AltoNivel raizAltoNivel;
+
+	private Comun raizComun;
 
 	private String nombre;
 
@@ -46,6 +55,86 @@ public class EPS {
 
 	public void setCaraterEconomico(double caraterEconomico) {
 		this.caraterEconomico = caraterEconomico;
+	}
+
+	public void cargarAltoNivel(String path) {
+
+		File file = new File(path);
+		if (file.exists()) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String linea;
+		        while((linea=br.readLine())!=null) {
+		        	String[] write = linea.split(",");
+					agregarAltoNivel(write[0], write[1], write[2], Double.parseDouble(write[3]), Integer.parseInt(write[4]));
+		        }
+				br.close();
+
+			} catch (IOException e) {
+				e.getStackTrace();
+			}
+		}
+
+	}
+	
+	public void cargarComun(String path) {
+
+		File file = new File(path);
+		if (file.exists()) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String linea;
+		        while((linea=br.readLine())!=null) {
+		        	String[] write = linea.split(",");
+					agregarComun(write[0], write[1], write[2], write[3]);
+		        }
+				br.close();
+
+			} catch (IOException e) {
+				e.getStackTrace();
+			}
+		}
+
+	}
+	
+	public void cargarSubsidiados(String path) {
+
+		File file = new File(path);
+		if (file.exists()) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String linea;
+		        while((linea=br.readLine())!=null) {
+		        	String[] write = linea.split(",");
+					agregarSubsidiado(write[0], write[1], write[2], write[3]);
+		        }
+				br.close();
+
+			} catch (IOException e) {
+				e.getStackTrace();
+			}
+		}
+
+	}
+	
+	public void cargarContributivos(String path) {
+
+		File file = new File(path);
+		if (file.exists()) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String linea;
+		        while((linea=br.readLine())!=null) {
+		        	String[] write = linea.split(",");
+					agregarContributivo(write[0], write[1], write[2], write[3]);
+		        }
+				br.close();
+
+			} catch (IOException e) {
+				e.getStackTrace();
+			}
+		}
+
 	}
 
 	// Revisa los metodos del controller de Hospital para ver como se usa xD
@@ -602,5 +691,131 @@ public class EPS {
 	public void borrarMedicoHospitalE(int licencia, int nit) throws NotFoundException {
 		buscarHospital(nit).eliminarMedicoEspecialista(licencia);
 	}
+	// __________________________________________________________________________________________________________________________________________________________________//
+	// Aqui empienzan los metodos de arboles, que son relativamente cortos
 
+	public void agregarAltoNivel(String id, String codigo, String nombre, double costo, int dosis) {
+		AltoNivel c = new AltoNivel(id, codigo, nombre, costo, dosis);
+		if (raizAltoNivel == null)
+			raizAltoNivel = c;
+		else {
+			raizAltoNivel.insertar(c);
+		}
+	}
+
+	public void agregarComun(String id, String codigo, String nombre, String principioActivo) {
+		Comun c = new Comun(id, codigo, nombre, principioActivo);
+		if (raizComun == null)
+			raizComun = c;
+		else {
+			raizComun.insertar(c);
+		}
+	}
+
+	public void eliminarAltoNivel(String nombre) {
+		raizAltoNivel = raizAltoNivel.eliminar(nombre);
+	}
+
+	public void eliminarComun(String nombre) {
+		raizComun = raizComun.eliminar(nombre);
+	}
+
+	public Collection<AltoNivel> darListaAltoNivel() {
+		if (raizAltoNivel == null)
+			return null;
+		else {
+			Collection<AltoNivel> resp = new ArrayList<AltoNivel>();
+			raizAltoNivel.inorden(resp);
+			return resp;
+		}
+	}
+
+	public Collection<Comun> darListaComun() {
+		if (raizComun == null)
+			return null;
+		else {
+			Collection<Comun> resp = new ArrayList<Comun>();
+			raizComun.inorden(resp);
+			return resp;
+		}
+	}
+
+	public int contarHojasAltoNivel() {
+		return raizAltoNivel == null ? 0 : raizAltoNivel.contarHojas();
+	}
+
+	public int contarComun() {
+		return raizComun == null ? 0 : raizComun.contarHojas();
+	}
+
+	public int darPesoAltoNivel() {
+		return raizAltoNivel == null ? 0 : raizAltoNivel.darPeso();
+	}
+
+	public int darPesoComun() {
+		return raizComun == null ? 0 : raizComun.darPeso();
+	}
+	
+	//______________________________________________________________________________________________________________________________________________________________________________________________-//
+	public void agregarSubsidiado(String nombre, String apellido, String id,String sisben) {
+		PacienteSubsidiado c = new PacienteSubsidiado(nombre, apellido, id, sisben);
+		if (raizPacienteS == null)
+			raizPacienteS = c;
+		else {
+			raizPacienteS.insertar(c);
+		}
+	}
+
+	public void agregarContributivo(String nombre, String apellido, String id,String cuota) {
+		PacienteContributario c = new PacienteContributario(nombre, apellido, id, cuota);
+		if (raizPacienteC == null)
+			raizPacienteC = c;
+		else {
+			raizPacienteC.insertar(c);
+		}
+	}
+
+	public void eliminarSubsidiado(String nombre) {
+		raizPacienteS = raizPacienteS.eliminar(nombre);
+	}
+
+	public void eliminarContributivo(String nombre) {
+		raizPacienteC = raizPacienteC.eliminar(nombre);
+	}
+
+	public Collection<PacienteSubsidiado> darListaSubsiado() {
+		if (raizPacienteS == null)
+			return null;
+		else {
+			Collection<PacienteSubsidiado> resp = new ArrayList<PacienteSubsidiado>();
+			raizPacienteS.inorden(resp);
+			return resp;
+		}
+	}
+
+	public Collection<PacienteContributario> darListaContributivo() {
+		if (raizPacienteC == null)
+			return null;
+		else {
+			Collection<PacienteContributario> resp = new ArrayList<PacienteContributario>();
+			raizPacienteC.inorden(resp);
+			return resp;
+		}
+	}
+
+	public int contarHojasSubsidiado() {
+		return raizPacienteS == null ? 0 : raizPacienteS.contarHojas();
+	}
+
+	public int contarHojasContributivo() {
+		return raizPacienteC == null ? 0 : raizPacienteC.contarHojas();
+	
+	}
+	public int darPesoSubsidiado() {
+		return raizPacienteS == null ? 0 : raizPacienteS.darPeso();
+	}
+
+	public int darPesoContributivo() {
+		return raizPacienteC == null ? 0 : raizPacienteC.darPeso();
+	}
 }
