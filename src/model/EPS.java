@@ -8,19 +8,19 @@ public class EPS {
 
 	private Administrador admin;
 
+	private Paciente raizPaciente;
+
+	private Medico primero;
+
 	private String nombre;
+
 	private double caraterEconomico;
-	
-	private Paciente pacienteRaiz;
-	private Medicamento medicamentoRaiz;
 
 	private ArrayList<IPS> ipses;
 
 	public EPS(String nombre, double caracterEconomico) {
 		this.nombre = nombre;
 		this.caraterEconomico = caracterEconomico;
-		pacienteRaiz = null;
-		medicamentoRaiz = null;
 		this.ipses = new ArrayList<IPS>();
 	}
 
@@ -47,22 +47,6 @@ public class EPS {
 	public void setCaraterEconomico(double caraterEconomico) {
 		this.caraterEconomico = caraterEconomico;
 	}
-	
-	public void setPacienteRaiz(Paciente paciente) {
-		pacienteRaiz = paciente;
-	}
-	
-	public Paciente getPacienteRaiz() {
-		return pacienteRaiz;
-	}
-	
-	public void setMedicamentoRaiz(Medicamento medicamento) {
-		medicamentoRaiz = medicamento;
-	}
-	
-	public Medicamento getMedicamentoRaiz() {
-		return medicamentoRaiz;
-	}
 
 	// Revisa los metodos del controller de Hospital para ver como se usa xD
 	/**
@@ -79,7 +63,7 @@ public class EPS {
 	 * @param acreditado    it indicates if the institution is accredited
 	 */
 	public void agregarIPS(int nit, String nombre, String direccion, String tipo, int nivel, String representante,
-		String universitario, String acreditado) {
+			String universitario, String acreditado) {
 		Hospital h = new Hospital(nit, nombre, direccion, tipo, nivel, representante, universitario, acreditado);
 		ipses.add(h);
 	}
@@ -197,15 +181,16 @@ public class EPS {
 
 	// Este metodo lo uso para la busqueda binaria
 	/**
-	 * This method allows to sort a health post list by "Nit" number using bubble sort
-	 * algorithm 
+	 * This method allows to sort a health post list by "Nit" number using bubble
+	 * sort algorithm
+	 * 
 	 * @return A sort healt post list
 	 */
 	public ArrayList<PuestoDeSalud> ordenarPuestos_Nit() {
 		ArrayList<PuestoDeSalud> c = obtenerPuestosParaMostrar();
 		for (int i = 0; i < c.size(); i++) {
 			for (int j = 0; j < c.size() - 1 - i; j++) {
-				if (c.get(j).getNit()> c.get(j+1).getNit()) {
+				if (c.get(j).getNit() > c.get(j + 1).getNit()) {
 					PuestoDeSalud temp = c.get(j);
 					c.set(j, c.get(j + 1));
 					c.set(j + 1, temp);
@@ -434,6 +419,188 @@ public class EPS {
 			}
 		}
 		return hospitales;
+	}
+
+	// _______________________________________________________________________________________________________________________________________________________________//
+	// Esto finaliza la parte de las listas y ordenamientos de ArrayList, con las
+	// listas decidi cambiar y hacerlo de acuerdo al modelo de esta EPS
+	// https://www.epssura.com/index.php/pac-directorio#
+	// Mira el link para que te hagas una idea
+	// Lo que vienen son metodos de listas
+	// _______________________________________________________________________________________________________________________________________________________________//
+
+	// Bruh, este metodo es una busqueda secuencial para un menu chido en al
+	// interfaz de medicos
+	/**
+	 * This method allows to find a clinic to show its doctors
+	 * 
+	 * @param nit The nit of the Clinic
+	 * @return A clinic
+	 * @throws NotFoundException if the searched clinic does not exist
+	 */
+	public Clinica buscarClinica(int nit) throws NotFoundException {
+		ArrayList<Clinica> c = obtenerClinicasParaMostrar();
+		Clinica buscada = null;
+		boolean close = true;
+		for (int i = 0; i < c.size() && close; i++) {
+			if (nit == c.get(i).getNit()) {
+				buscada = c.get(i);
+				close = false;
+			}
+		}
+
+		if (buscada == null) {
+			throw new NotFoundException();
+		}
+		return buscada;
+	}
+
+	/**
+	 * This method allows to find a health post to show its doctors
+	 * 
+	 * @param nit The nit of the health post
+	 * @return A health post
+	 * @throws NotFoundException if the searched clinic does not exist
+	 */
+	public PuestoDeSalud buscarPuesto(int nit) throws NotFoundException {
+		ArrayList<PuestoDeSalud> c = obtenerPuestosParaMostrar();
+		PuestoDeSalud buscada = null;
+		boolean close = true;
+		for (int i = 0; i < c.size() && close; i++) {
+			if (nit == c.get(i).getNit()) {
+				buscada = c.get(i);
+				close = false;
+			}
+		}
+
+		if (buscada == null) {
+			throw new NotFoundException();
+		}
+		return buscada;
+	}
+
+	/**
+	 * This method allows to find a hospital to show its doctors
+	 * 
+	 * @param nit The nit of the hospital post
+	 * @return A health post
+	 * @throws NotFoundException if the searched clinic does not exist
+	 */
+	public Hospital buscarHospital(int nit) throws NotFoundException {
+		ArrayList<Hospital> c = obtenerHospitalesParaMostrar();
+		Hospital buscada = null;
+		boolean close = true;
+		for (int i = 0; i < c.size() && close; i++) {
+			if (nit == c.get(i).getNit()) {
+				buscada = c.get(i);
+				close = false;
+			}
+		}
+
+		if (buscada == null) {
+			throw new NotFoundException();
+		}
+		return buscada;
+	}
+
+	// Esta cosa pone medicos en la tabla
+	/**
+	 * This method allows to add a doctor
+	 * 
+	 * @param m   A doctor to add
+	 * @param nit The clinic's nit
+	 * @throws NotFoundException if the clinic is not founded
+	 * 
+	 */
+	public void añadirMedicoClinica(MedicoEspecialista m, int nit) throws NotFoundException {
+		buscarClinica(nit).insertarMedico(m);
+	}
+
+	// Esta cosa los borra
+	/**
+	 * This method allows to delete a doctor
+	 * 
+	 * @param m   A doctor to delete
+	 * @param nit The clinic's nit
+	 * @throws NotFoundException if the clinic is not founded
+	 */
+	public void borrarMedicoClinica(int licencia, int nit) throws NotFoundException {
+		buscarClinica(nit).eliminarMedico(licencia);
+	}
+
+	// Esta cosa pone medicos en la tabla
+	/**
+	 * This method allows to add a doctor
+	 * 
+	 * @param m   A doctor to add
+	 * @param nit The clinic's nit
+	 * @throws NotFoundException if the clinic is not founded
+	 * 
+	 */
+	public void añadirMedicoPuesto(MedicoGeneral m, int nit) throws NotFoundException {
+		buscarPuesto(nit).insertarMedico(m);
+	}
+
+	// Esta cosa los borra
+	/**
+	 * This method allows to delete a doctor
+	 * 
+	 * @param m   A doctor to delete
+	 * @param nit The clinic's nit
+	 * @throws NotFoundException if the clinic is not founded
+	 */
+	public void borrarMedicoPuesto(int licencia, int nit) throws NotFoundException {
+		buscarPuesto(nit).eliminarMedico(licencia);
+	}
+
+	// Esta cosa pone medicos en la tabla
+	/**
+	 * This method allows to add a doctor
+	 * 
+	 * @param m   A doctor to add
+	 * @param nit The hospital's nit
+	 * @throws NotFoundException if the hospital is not founded
+	 * 
+	 */
+	public void añadirMedicoHospital(MedicoGeneral m, int nit) throws NotFoundException {
+		buscarHospital(nit).insertarMedico(m);
+	}
+
+	// Esta cosa los borra
+	/**
+	 * This method allows to delete a doctor
+	 * 
+	 * @param m   A doctor to delete
+	 * @param nit The hospital's nit
+	 * @throws NotFoundException if the hospital is not founded
+	 */
+	public void borrarMedicoHospital(int licencia, int nit) throws NotFoundException {
+		buscarHospital(nit).eliminarMedico(licencia);
+	}
+
+	// Esta cosa pone medicos en la tabla
+	/**
+	 * This method allows to add a doctor
+	 * 
+	 * @param m   A doctor to add
+	 * @param nit The hospital's nit
+	 * @throws NotFoundException if the hospital is not founded
+	 * 
+	 */
+	public void añadirMedicoHospital(MedicoEspecialista m, int nit) throws NotFoundException {
+		buscarHospital(nit).insertarMedicoEspecialista(m);
+	}
+
+	// Esta cosa los borra
+	/**
+	 * This method allows to delete a doctor
+	 * 
+	 * @param m   A doctor to delete
+	 * @param nit The hospital's nit
+	 * @throws NotFoundException if the hospital is not founded
+	 */
+	public void borrarMedicoHospitalE(int licencia, int nit) throws NotFoundException {
+		buscarHospital(nit).eliminarMedicoEspecialista(licencia);
 	}
 
 }

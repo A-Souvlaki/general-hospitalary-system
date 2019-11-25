@@ -56,6 +56,9 @@ public class ClinicaController implements Initializable {
 	private MenuItem sortNombre;
 	
 	@FXML
+	private MenuItem medicos;
+	
+	@FXML
 	private Button ver;
 
 	private TableView<Clinica> listIPS;
@@ -76,8 +79,8 @@ public class ClinicaController implements Initializable {
 
 	void refresh() {
 		listIPS = new TableView<Clinica>();
-		listIPS.setPrefWidth(583);
-		listIPS.setPrefHeight(360);
+		listIPS.setMaxWidth(540);
+		listIPS.setMaxHeight(360);
 
 		clinicas = FXCollections
 				.observableArrayList(Main.getEPS().obtenerClinicasParaMostrar());
@@ -85,30 +88,31 @@ public class ClinicaController implements Initializable {
 
 		TableColumn<Clinica, Integer> colNit = new TableColumn<>("Nit");
 		colNit.setCellValueFactory(new PropertyValueFactory<Clinica, Integer>("nit"));
-		colNit.setMinWidth(listIPS.getMaxWidth() / 2);
+		colNit.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		TableColumn<Clinica, String> colName = new TableColumn<>("Nombre");
 		colName.setCellValueFactory(new PropertyValueFactory<Clinica, String>("nombre"));
-		colName.setMinWidth(listIPS.getMaxWidth() / 2);
+		colName.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		TableColumn<Clinica, String> colDir = new TableColumn<>("Direccion");
 		colDir.setCellValueFactory(new PropertyValueFactory<Clinica, String>("direccion"));
-		colDir.setMinWidth(listIPS.getMaxWidth() / 2);
+		colDir.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		TableColumn<Clinica, String> colTipo = new TableColumn<>("Tipo");
 		colTipo.setCellValueFactory(new PropertyValueFactory<Clinica, String>("tipo"));
-		colTipo.setMinWidth(listIPS.getMaxWidth() / 2);
+		colTipo.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		TableColumn<Clinica, String> colNivel = new TableColumn<>("Nivel");
 		colNivel.setCellValueFactory(new PropertyValueFactory<Clinica, String>("nivel"));
-		colNivel.setMinWidth(listIPS.getMaxWidth() / 2);
+		colNivel.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		TableColumn<Clinica, String> colEspe = new TableColumn<>("Especialidad");
 		colEspe.setCellValueFactory(new PropertyValueFactory<Clinica, String>("especialidad"));
-		colEspe.setMinWidth(listIPS.getMaxWidth() / 2);
+		colEspe.setMinWidth(listIPS.getMaxWidth() / 6);
 
 		listIPS.getColumns().addAll(colNit, colName, colDir, colTipo, colNivel, colEspe);
 		vbox.getChildren().add(listIPS);
+		
 
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -164,7 +168,23 @@ public class ClinicaController implements Initializable {
 
 			}
 		});
+		
+		
 
+	}
+	
+	@FXML
+	void medical(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/application/medicosClinica.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.centerOnScreen();
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

@@ -29,7 +29,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Clinica;
 import model.PuestoDeSalud;
 
 public class PSaludController implements Initializable{
@@ -74,49 +73,50 @@ public class PSaludController implements Initializable{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	void refresh() {
 		listIPS = new TableView<PuestoDeSalud>();
-		listIPS.setPrefWidth(583);
-		listIPS.setPrefHeight(360);
+		listIPS.setMaxWidth(900);
+		listIPS.setMaxHeight(360);
 
 		puestos = FXCollections.observableArrayList(Main.getEPS().obtenerPuestosParaMostrar());
 		listIPS.setItems(puestos);
 
 		TableColumn<PuestoDeSalud, Integer> colNit = new TableColumn<>("Nit");
 		colNit.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, Integer>("nit"));
-		colNit.setMinWidth(70);
+		colNit.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colName = new TableColumn<>("Nombre");
 		colName.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("nombre"));
-		colName.setMinWidth(70);
+		colName.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colDir = new TableColumn<>("Direccion");
 		colDir.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("direccion"));
-		colDir.setMinWidth(70);
+		colDir.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colTipo = new TableColumn<>("Tipo");
 		colTipo.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("tipo"));
-		colTipo.setMinWidth(70);
+		colTipo.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colNivel = new TableColumn<>("Nivel");
 		colNivel.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("nivel"));
-		colNivel.setMinWidth(70);
+		colNivel.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colEnfe = new TableColumn<>("Jefe de Enfermeros");
 		colEnfe.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("jefe_enfermeros"));
-		colEnfe.setMinWidth(150);
+		colEnfe.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colLab = new TableColumn<>("Jefe de Laboratorio");
 		colLab.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("jefe_laboratorio"));
-		colLab.setMinWidth(100);
+		colLab.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colVac = new TableColumn<>("Vacunas");
 		colVac.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("vacunas"));
-		colVac.setMinWidth(100);
+		colVac.setMinWidth(listIPS.getMaxWidth()/9);
 
 		TableColumn<PuestoDeSalud, String> colFar = new TableColumn<>("Farmacia");
 		colFar.setCellValueFactory(new PropertyValueFactory<PuestoDeSalud, String>("farmacia"));
-		colFar.setMinWidth(100);
+		colFar.setMinWidth(listIPS.getMaxWidth()/9);
 
 		listIPS.getColumns().addAll(colNit, colName, colDir, colTipo, colNivel, colEnfe, colLab, colVac, colFar);
 		vbox.getChildren().add(listIPS);
@@ -161,7 +161,6 @@ public class PSaludController implements Initializable{
 
 			}
 		});
-
 		ver.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -173,6 +172,20 @@ public class PSaludController implements Initializable{
 			}
 		});
 
+	}
+	
+	@FXML
+	void medical(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/application/medicosPuesto.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.centerOnScreen();
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

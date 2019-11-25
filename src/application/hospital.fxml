@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -11,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HospitalController">
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HospitalController">
    <children>
-      <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="-4.0" prefHeight="360.0" prefWidth="706.0">
+      <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="-4.0" prefHeight="360.0" prefWidth="800.0">
          <children>
             <MenuBar prefHeight="8.0" prefWidth="360.0">
                <menus>
@@ -43,6 +44,10 @@
                   <Button mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="66.0" text="Agregar" />
                   <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
                   <Button fx:id="ver" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Ver" />
+                  <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
+                  <ChoiceBox fx:id="med" prefHeight="25.0" prefWidth="98.0" />
+                  <ImageView fitHeight="41.0" fitWidth="8.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button mnemonicParsing="false" onAction="#displayValue" text="Ir" />
                </children>
             </HBox>
          </children>

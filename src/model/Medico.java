@@ -1,55 +1,64 @@
 package model;
 
-public class Medico {
-	
-	private String nombre;
-	private String apellido;
-	private int edad;
-	private String licencia;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
+public abstract class Medico {
+	
+	private StringProperty nombre_apellidos;
+	private StringProperty id;
+	private IntegerProperty no_licencia;
+
+	private Cita principal;
+	
 	private Medico siguiente;
 	
-	private Cita citaPrincipal;
+	public Medico(String nombre_a,String id,int no,Medico siguiente) {
+		this.nombre_apellidos = new SimpleStringProperty(nombre_a);
+		this.id = new SimpleStringProperty(id);
+		this.no_licencia = new SimpleIntegerProperty(no);
+		this.siguiente = siguiente;
+	}
 	
-	public Medico(String nombre, String apellido, int edad, String licencia) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.licencia = licencia;
-		siguiente = null;
-		citaPrincipal = null;
+	public Medico(String nombre_a,String id,int no) {
+		this.nombre_apellidos = new SimpleStringProperty(nombre_a);
+		this.id = new SimpleStringProperty(id);
+		this.no_licencia = new SimpleIntegerProperty(no);
+		
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombre_apellidos() {
+		return nombre_apellidos.get();
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre_apellidos(String nombre_apellidos) {
+		this.nombre_apellidos.set(nombre_apellidos);
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getId() {
+		return id.get();
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setId(String id) {
+		this.id.set(id);
 	}
 
-	public int getEdad() {
-		return edad;
+	public Integer getNo_licencia() {
+		return no_licencia.get();
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+	public void setNo_licencia(Integer no_licencia) {
+		this.no_licencia.set(no_licencia);
 	}
 
-	public String getLicencia() {
-		return licencia;
+	public Cita getPrincipal() {
+		return principal;
 	}
 
-	public void setLicencia(String licencia) {
-		this.licencia = licencia;
+	public void setPrincipal(Cita principal) {
+		this.principal = principal;
 	}
 
 	public Medico getSiguiente() {
@@ -59,23 +68,7 @@ public class Medico {
 	public void setSiguiente(Medico siguiente) {
 		this.siguiente = siguiente;
 	}
-
-	public Cita getCitaPrincipal() {
-		return citaPrincipal;
-	}
-
-	public void setCitaPrincipal(Cita citaPrincipal) {
-		this.citaPrincipal = citaPrincipal;
-	}
-
-	@Override
-	public String toString() {
-		String m = "";
-		m += "\nNombre: " + nombre;
-		m += "\nApellido: " + apellido;
-		m += "\nEdad: " + edad;
-		m += "\nLicencia: " + licencia;
-		return m;
-	}
+	
+	
 	
 }

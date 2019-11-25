@@ -27,7 +27,7 @@ public class Main extends Application {
 			//init();
 			Parent root;
 			if(eps.getAdmin() == null) {
-				root = FXMLLoader.load(getClass().getResource("/application/pSalud.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/application/hospital.fxml"));
 			}else {
 				root = FXMLLoader.load(getClass().getResource("login.fxml"));
 			}

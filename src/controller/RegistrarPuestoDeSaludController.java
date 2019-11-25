@@ -59,7 +59,7 @@ public class RegistrarPuestoDeSaludController implements Initializable {
 
 	
 	@FXML
-	public void addClinic(ActionEvent event) {
+	public void addPuesto(ActionEvent event) {
 		try {
 			if (validateClinicData()) {
 				dataPSalud();

@@ -1,28 +1,34 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class MedicoEspecialista extends Medico{
 	
-	private String especialidad;
-	
-	public MedicoEspecialista(String nombre, String apellido, int edad, String licencia, String especialidad) {
-		super(nombre, apellido, edad, licencia);
-		this.especialidad = especialidad;
-	}
+	private StringProperty medico_especialista;
 
-	public String getEspecialidad() {
-		return especialidad;
-	}
-
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
-	}
-
-	@Override
-	public String toString() {
-		String m = "";
-		m += super.toString();
-		m += "\nEspecialidad: " + especialidad;
-		return m;
+	public MedicoEspecialista(String nombre_apellidos, String id, int no_licencia,String especialidad) {
+		super(nombre_apellidos, id, no_licencia);
+		this.medico_especialista = new SimpleStringProperty(especialidad);
+		
 	}
 	
+	
+
+	public String getMedico_especialista() {
+		return medico_especialista.get();
+	}
+
+
+
+	public void setMedico_especialista(String medico_especialista) {
+		this.medico_especialista.set(medico_especialista);
+	}
+
+
+
+	
+	
+	
+
 }

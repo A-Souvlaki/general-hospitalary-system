@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -34,6 +35,7 @@ import model.Hospital;
 
 public class HospitalController implements Initializable {
 	private ObservableList<Hospital> hospitales;
+	ObservableList<String> listA = FXCollections.observableArrayList();
 
 	private Stage stage;
 	@FXML
@@ -50,7 +52,9 @@ public class HospitalController implements Initializable {
 
 	@FXML
 	private MenuItem sortAgent;
-
+	
+	@FXML
+	private ChoiceBox<String> med;
 
 	@FXML
 	private Button ver;
@@ -73,43 +77,43 @@ public class HospitalController implements Initializable {
 
 	void refresh() {
 		listIPS = new TableView<Hospital>();
-		listIPS.setPrefWidth(583);
-		listIPS.setPrefHeight(360);
+		listIPS.setMaxWidth(800);
+		listIPS.setMaxHeight(360);
 
 		hospitales = FXCollections.observableArrayList(Main.getEPS().obtenerHospitalesParaMostrar());
 		listIPS.setItems(hospitales);
 
 		TableColumn<Hospital, Integer> colNit = new TableColumn<>("Nit");
 		colNit.setCellValueFactory(new PropertyValueFactory<Hospital, Integer>("nit"));
-		colNit.setMinWidth(100);
+		colNit.setMinWidth(listIPS.getMinWidth()/8);
 
 		TableColumn<Hospital, String> colName = new TableColumn<>("Nombre");
 		colName.setCellValueFactory(new PropertyValueFactory<Hospital, String>("nombre"));
-		colName.setMinWidth(100);
+		colName.setMinWidth(listIPS.getMinWidth()/8);
 
 		TableColumn<Hospital, String> colDir = new TableColumn<>("Direccion");
 		colDir.setCellValueFactory(new PropertyValueFactory<Hospital, String>("direccion"));
-		colDir.setMinWidth(100);
+		colDir.setMinWidth(listIPS.getMinWidth()/8);
 
 		TableColumn<Hospital, String> colTipo = new TableColumn<>("Tipo");
 		colTipo.setCellValueFactory(new PropertyValueFactory<Hospital, String>("tipo"));
-		colTipo.setMinWidth(100);
+		colTipo.setMinWidth(listIPS.getMinWidth()/8);
 
 		TableColumn<Hospital, String> colNivel = new TableColumn<>("Nivel");
 		colNivel.setCellValueFactory(new PropertyValueFactory<Hospital, String>("nivel"));
-		colNivel.setMinWidth(100);
+		colNivel.setMinWidth(listIPS.getMinWidth()/8);
 
 		TableColumn<Hospital, String> colRepre = new TableColumn<>("Representante");
 		colRepre.setCellValueFactory(new PropertyValueFactory<Hospital, String>("representante"));
-		colRepre.setMinWidth(120);
+		colRepre.setMinWidth(listIPS.getMinWidth()/8);
 		
 		TableColumn<Hospital, String> colUni = new TableColumn<>("Docencia");
 		colUni.setCellValueFactory(new PropertyValueFactory<Hospital, String>("universitario"));
-		colUni.setMinWidth(200);
+		colUni.setMinWidth(listIPS.getMinWidth()/8);
 		
 		TableColumn<Hospital, String> colAcre = new TableColumn<>("Acreditacion");
 		colAcre.setCellValueFactory(new PropertyValueFactory<Hospital, String>("acreditado"));
-		colAcre.setMinWidth(200);
+		colAcre.setMinWidth(listIPS.getMinWidth()/8);
 
 		listIPS.getColumns().addAll(colNit, colName, colDir, colTipo, colNivel, colRepre,colUni,colAcre);
 		vbox.getChildren().add(listIPS);
@@ -215,10 +219,46 @@ public class HospitalController implements Initializable {
     	
     	});
 	}
+	
+	public void createBoxType() {
+		listA.remove(listA);
+		listA.addAll("Medicos Especialistas","Medicos Generales");
+		med.getItems().addAll(listA);
+
+	}
+	
+	@FXML
+	public void displayValue(ActionEvent  e) {
+		String option = med.getValue();
+		try {
+			if (option.equals("Medicos Especialistas")) {
+				Parent root = FXMLLoader.load(getClass().getResource("/application/medicosHospitalE.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+				stage.setScene(scene);
+				stage.centerOnScreen();
+				stage.show();
+			} else if (option.equals("Medicos Generales")) {
+				Parent root = FXMLLoader.load(getClass().getResource("/application/medicosHospitalG.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+				stage.setScene(scene);
+				stage.centerOnScreen();
+				stage.show();
+			} 
+		} catch (NullPointerException exception) {
+			Alert error = new Alert(AlertType.INFORMATION);
+			error.setHeaderText("¡Selecciona un nivel!");
+			error.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		refresh();
+		createBoxType();
 
 	}
 }
