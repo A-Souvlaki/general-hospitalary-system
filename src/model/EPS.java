@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import excepciones.NotFoundException;
 
-public class EPS {
+public class EPS implements Serializable {
 
 	private Administrador admin;
 

@@ -213,6 +213,12 @@ public class HospitalController implements Initializable {
 		    		alert.setHeaderText(null);
 					alert.setContentText("el nombre no esta en la lista");
 					alert.showAndWait();
+				} catch (NumberFormatException e) {
+					Alert alert = new Alert(AlertType.ERROR);
+		    		alert.setTitle("Error");
+		    		alert.setHeaderText(null);
+					alert.setContentText("Recuerda que el nit son solo numeros!!!");
+					alert.showAndWait();				
 				}
    			
     		}

@@ -1,42 +1,41 @@
 package model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
-public abstract class Medicamento{
+public abstract class Medicamento implements Serializable{
 	
-	private StringProperty id;
-	private StringProperty codigo_atc;
-	private StringProperty nombre;
+	private String id;
+	private String codigo_atc;
+	private String nombre;
 
 	public Medicamento(String id,String codigo,String nombre) {
-		this.id = new SimpleStringProperty(id);
-		this.codigo_atc = new SimpleStringProperty(codigo);
-		this.nombre = new SimpleStringProperty(nombre);
+		this.id = id;
+		this.codigo_atc =  codigo;
+		this.nombre =  nombre;
 	}
 
 	public String getId() {
-		return id.get();
+		return id;
 	}
 
 	public void setId(String id) {
-		this.id.set(id);
+		this.id =(id);
 	}
 
 	public String getCodigo_atc() {
-		return codigo_atc.get();
+		return codigo_atc;
 	}
 
 	public void setCodigo_atc(String codigo_atc) {
-		this.codigo_atc.set(codigo_atc);
+		this.codigo_atc =codigo_atc;
 	}
 
 	public String getNombre() {
-		return nombre.get();
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre.set(nombre);
+		this.nombre = nombre;
 	}
 	
 }

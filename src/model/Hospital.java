@@ -2,39 +2,67 @@ package model;
 
 import java.util.ArrayList;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class Hospital extends IPS{
 	
 	private ArrayList<MedicoEspecialista> medicosA;
 	private ArrayList<MedicoGeneral> medicosB;
 	
-	private StringProperty representante;
-	private StringProperty universitario;
-	private StringProperty acreditado;
+	private String representante;
+	private String universitario;
+	private String acreditado;
 
 	private MedicoEspecialista primeroA;
 	private MedicoGeneral primeroB;
 	
 	public Hospital(int nit, String nombre, String direccion,String tipo,int nivel,String representante,String universitario,String acreditado) {
 		super(nit, nombre, direccion,tipo,nivel);
-		this.representante = new SimpleStringProperty(representante);
-		this.universitario = new SimpleStringProperty(universitario);
-		this.acreditado = new SimpleStringProperty(acreditado);
+		this.representante = representante;
+		this.universitario = universitario;
+		this.acreditado = acreditado;
 		medicosA = new ArrayList<MedicoEspecialista>();
 		medicosB = new ArrayList<MedicoGeneral>();
 
 		
 	}
 
+	
+
 	public String getRepresentante() {
-		return representante.get();
+		return representante;
 	}
 
+
+
 	public void setRepresentante(String representante) {
-		this.representante.set(representante);
+		this.representante = representante;
 	}
+
+
+
+	public String getUniversitario() {
+		return universitario;
+	}
+
+
+
+	public void setUniversitario(String universitario) {
+		this.universitario = universitario;
+	}
+
+
+
+	public String getAcreditado() {
+		return acreditado;
+	}
+
+
+
+	public void setAcreditado(String acreditado) {
+		this.acreditado = acreditado;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -43,28 +71,14 @@ public class Hospital extends IPS{
 
 	
 	public int compareTo(Hospital o) {
-		return representante.get().compareTo(o.getRepresentante());
+		return representante.compareTo(o.getRepresentante());
 	}
 	
 	public int compareByName(String n) {
 		return super.getNombre().compareTo(n);
 	}
 
-	public String getUniversitario() {
-		return universitario.get();
-	}
-
-	public void setUniversitario(String universitario) {
-		this.universitario.set(universitario);
-	}
-
-	public String getAcreditado() {
-		return acreditado.get();
-	}
-
-	public void setAcreditado(String acreditado) {
-		this.acreditado.set(acreditado);
-	}
+	
 	
 	public ArrayList<MedicoEspecialista> getMedicosA() {
 		return medicosA;

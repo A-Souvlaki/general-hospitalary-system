@@ -32,7 +32,7 @@ public class FileManager {
 		return groce;
 	}
 	/**
-	 ** this method allows serialize the class Market
+	 ** this method allows serialize the class EPS
 	 ** @param the name of the path. nameOfPath != null
 	 ** @param the Market to serialize market != null
 	 ** <b>post:</b>a binary file was created</br>

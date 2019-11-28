@@ -21,10 +21,15 @@
       </Label>
       <TextField fx:id="textField" layoutX="256.0" layoutY="158.0" promptText="User Name" />
       <PasswordField fx:id="pw" layoutX="256.0" layoutY="217.0" promptText="Password" />
-      <Button layoutX="256.0" layoutY="283.0" mnemonicParsing="false" onAction="#ingresarInformacionAdmin" text="Log in">
+      <Button layoutX="256.0" layoutY="282.0" mnemonicParsing="false" onAction="#ingresarInformacionAdmin" text="Log in">
          <font>
             <Font name="Wingdings 2" size="12.0" />
          </font>
       </Button>
+      <Label fx:id="labelTime" layoutX="256.0" layoutY="88.0" prefHeight="35.0" prefWidth="109.0">
+         <font>
+            <Font name="Playbill" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

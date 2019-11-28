@@ -16,10 +16,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import threads.ClockThread;
 import javafx.scene.Node;
 
 public class LoginController implements Initializable {
@@ -38,6 +40,12 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Button signIn;
+	
+	@FXML
+	private Label labelTime;
+	
+	 
+	private ClockThread t;
 
 	@FXML
 	void ingresarInformacionAdmin(ActionEvent event) {
@@ -68,8 +76,12 @@ public class LoginController implements Initializable {
 			alert.setContentText("Password Incorrect, please try again");
 			alert.showAndWait();
 		}catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText(null);
+			alert.setContentText("Incorrect, please try again");
+			alert.showAndWait();
 			
-			e.printStackTrace();
 		} 
 	}
 
@@ -98,8 +110,17 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		startClock();
 
 	}
+	
+	public void updateTime(String time) {
+    	labelTime.setText(time);
+    }
+	
+	 public void startClock() {
+	    	t = new ClockThread(this);
+	    	t.start();
+	    }
 
 }

@@ -1,65 +1,68 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+public abstract class IPS implements Comparable<IPS>, Registrable, Serializable {
 
-public abstract class IPS implements Comparable<IPS>,Registrable {
-	
-	
 	public final static String PUBLICO = "Publico";
 	public final static String PRIVADO = "Privado";
 	public final static String MIXTO = "Mixto";
-	
-	private IntegerProperty nit;
-	private StringProperty nombre;
-	private StringProperty direccion;
-	private StringProperty tipo;
-	
-	private IntegerProperty nivel;
-	
+
+	private int nit;
+	private String nombre;
+	private String direccion;
+	private String tipo;
+
+	private int nivel;
+
 	public IPS(int nit, String nombre, String direccion, String tipo, int nivel) {
-		this.nit = new SimpleIntegerProperty(nit);
-		this.nombre = new SimpleStringProperty(nombre);
-		this.direccion = new SimpleStringProperty(direccion);
-		this.tipo = new SimpleStringProperty(tipo);
-		this.nivel = new SimpleIntegerProperty(nivel);
-	}
-
-	public int getNivel() {
-		return nivel.get();
-	}
-
-	public void setNivel(int nivel) {
-		this.nivel.set(nivel);
+		this.nit = nit;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.tipo = tipo;
+		this.nivel = nivel;
 	}
 
 	public int getNit() {
-		return nit.get();
+		return nit;
+	}
+
+	public void setNit(int nit) {
+		this.nit = nit;
 	}
 
 	public String getNombre() {
-		return nombre.get();
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getDireccion() {
-		return direccion.get();
+		return direccion;
 	}
-	
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	public String getTipo() {
-		return tipo.get();
+		return tipo;
 	}
 
 	public void setTipo(String tipo) {
-		this.tipo.set(tipo);;
+		this.tipo = tipo;
 	}
-	
-	
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
 	@Override
 	public String toString() {
@@ -68,15 +71,7 @@ public abstract class IPS implements Comparable<IPS>,Registrable {
 	}
 
 	public int compareByNombre(String n) {
-		return this.nombre.get().compareTo(n);
+		return this.nombre.compareTo(n);
 	}
-	
-	
-	
-
-	
-	
-	
-	
 
 }

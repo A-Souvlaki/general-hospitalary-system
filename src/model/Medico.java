@@ -1,65 +1,57 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
-public abstract class Medico {
+public abstract class Medico implements Serializable{
 	
-	private StringProperty nombre_apellidos;
-	private StringProperty id;
-	private IntegerProperty no_licencia;
+	private String nombre_apellidos;
+	private String id;
+	private Integer no_licencia;
 
-	private Cita principal;
+	
 	
 	private Medico siguiente;
 	
 	public Medico(String nombre_a,String id,int no,Medico siguiente) {
-		this.nombre_apellidos = new SimpleStringProperty(nombre_a);
-		this.id = new SimpleStringProperty(id);
-		this.no_licencia = new SimpleIntegerProperty(no);
+		this.nombre_apellidos = nombre_a;
+		this.id =  id;
+		this.no_licencia =  no;
 		this.siguiente = siguiente;
 	}
 	
 	public Medico(String nombre_a,String id,int no) {
-		this.nombre_apellidos = new SimpleStringProperty(nombre_a);
-		this.id = new SimpleStringProperty(id);
-		this.no_licencia = new SimpleIntegerProperty(no);
+		this.nombre_apellidos =nombre_a;
+		this.id = id;
+		this.no_licencia = no;
 		
 	}
 
+	
+
 	public String getNombre_apellidos() {
-		return nombre_apellidos.get();
+		return nombre_apellidos;
 	}
 
 	public void setNombre_apellidos(String nombre_apellidos) {
-		this.nombre_apellidos.set(nombre_apellidos);
+		this.nombre_apellidos = nombre_apellidos;
 	}
 
 	public String getId() {
-		return id.get();
+		return id;
 	}
 
 	public void setId(String id) {
-		this.id.set(id);
+		this.id = id;
 	}
 
 	public Integer getNo_licencia() {
-		return no_licencia.get();
+		return no_licencia;
 	}
 
 	public void setNo_licencia(Integer no_licencia) {
-		this.no_licencia.set(no_licencia);
+		this.no_licencia = no_licencia;
 	}
 
-	public Cita getPrincipal() {
-		return principal;
-	}
-
-	public void setPrincipal(Cita principal) {
-		this.principal = principal;
-	}
 
 	public Medico getSiguiente() {
 		return siguiente;

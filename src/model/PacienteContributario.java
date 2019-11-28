@@ -1,30 +1,29 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
-public class PacienteContributario extends Paciente{
+public class PacienteContributario extends Paciente implements Serializable{
 	
-	private StringProperty cuota;
+	private String cuota;
 	
 	private PacienteContributario izq;
 	private PacienteContributario der;
 
 	public PacienteContributario(String nombre, String apellido, String id,String cuota) {
 		super(nombre, apellido, id);
-		this.cuota =(new SimpleStringProperty(cuota));
+		this.cuota =cuota;
 	}
 
 
 	public String getCuota() {
-		return cuota.get();
+		return cuota;
 	}
 
 
 	public void setCuota(String cuota) {
-		this.cuota.set(cuota);
+		this.cuota = cuota;
 	}
 	
 	public void insertar(PacienteContributario nuevo) {

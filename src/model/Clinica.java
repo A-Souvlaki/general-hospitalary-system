@@ -1,23 +1,21 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-public class Clinica extends IPS{
+public class Clinica extends IPS implements Serializable{
 	
 	
 	private ArrayList<MedicoEspecialista> medicos;
 	
 	private MedicoEspecialista primero;
 	
-	private StringProperty especialidad;
+	private String especialidad;
 	
 	public Clinica(int nit, String nombre, String direccion,String tipo,int nivel,String especialidad) {
 		super(nit, nombre, direccion,tipo,nivel);
-		this.especialidad = new SimpleStringProperty(especialidad);
+		this.especialidad = especialidad;
 		medicos = new ArrayList<MedicoEspecialista>();
 	}
 
@@ -34,14 +32,19 @@ public class Clinica extends IPS{
 	}
 
 
+	
 
-	public String isEspecialidad() {
-		return especialidad.get();
+	public String getEspecialidad() {
+		return especialidad;
 	}
+
+
 
 	public void setEspecialidad(String especialidad) {
-		this.especialidad.set(especialidad);
+		this.especialidad = especialidad;
 	}
+
+
 
 	@Override
 	public String toString() {

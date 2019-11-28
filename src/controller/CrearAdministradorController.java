@@ -42,7 +42,7 @@ public class CrearAdministradorController {
 			if (validateManagerData()) {
 				initializateManager();
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource("/application/login.fxml"));
+					Parent root = FXMLLoader.load(getClass().getResource("/application/createEps.fxml"));
 					Scene scene = new Scene(root);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					stage.setScene(scene);

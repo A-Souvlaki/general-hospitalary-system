@@ -1,28 +1,26 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-public class PacienteSubsidiado extends Paciente{
+public class PacienteSubsidiado extends Paciente implements Serializable{
 	
-	private StringProperty sisben_p;
+	private String sisben_p;
 	
 	private PacienteSubsidiado izq;
 	private PacienteSubsidiado der;
 
 	public PacienteSubsidiado(String nombre, String apellido, String id,String sis) {
 		super(nombre, apellido, id);
-		this.sisben_p = new SimpleStringProperty(sis);
+		this.sisben_p = sis;
 	}
 
 	public String getSisben_p() {
-		return sisben_p.get();
+		return sisben_p;
 	}
 
 	public void setSisben_p(String sisben_p) {
-		this.sisben_p.set(sisben_p);
+		this.sisben_p = sisben_p;
 	}
 	
 	public void insertar(PacienteSubsidiado nuevo) {

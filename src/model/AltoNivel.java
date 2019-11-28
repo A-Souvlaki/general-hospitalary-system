@@ -1,41 +1,39 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class AltoNivel extends Medicamento {
+
+public class AltoNivel extends Medicamento implements Serializable {
 	
 	private AltoNivel izq;
 	private AltoNivel der;
 	
-	private DoubleProperty costo;
-	private IntegerProperty dosis_mg;
+	private double costo;
+	private int dosis_mg;
 
 	public AltoNivel(String id, String codigo, String nombre,double costo,int dosis) {
 		super(id, codigo, nombre);
-		this.costo = new SimpleDoubleProperty(costo);
-		this.dosis_mg = new SimpleIntegerProperty(dosis);
+		this.costo = costo;
+		this.dosis_mg = dosis;
 	}
 
 	public Double getCosto() {
-		return costo.get();
+		return costo;
 	}
 
 	public void setCosto(Double costo) {
-		this.costo.set(costo);
+		this.costo = costo;
 	}
 
 	public Integer getDosis_mg() {
-		return dosis_mg.get();
+		return dosis_mg;
 	}
 
 	public void setDosis_mg(Integer dosis_mg) {
-		this.dosis_mg.set(dosis_mg);
+		this.dosis_mg = dosis_mg;
 	}
 	
 	public void insertar(AltoNivel nuevo) {

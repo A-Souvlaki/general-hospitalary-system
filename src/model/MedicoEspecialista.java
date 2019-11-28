@@ -1,28 +1,27 @@
 package model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
-public class MedicoEspecialista extends Medico{
+public class MedicoEspecialista extends Medico implements Serializable{
 	
-	private StringProperty medico_especialista;
+	private String medico_especialista;
 
 	public MedicoEspecialista(String nombre_apellidos, String id, int no_licencia,String especialidad) {
 		super(nombre_apellidos, id, no_licencia);
-		this.medico_especialista = new SimpleStringProperty(especialidad);
+		this.medico_especialista = especialidad;
 		
 	}
 	
 	
 
 	public String getMedico_especialista() {
-		return medico_especialista.get();
+		return medico_especialista;
 	}
 
 
 
 	public void setMedico_especialista(String medico_especialista) {
-		this.medico_especialista.set(medico_especialista);
+		this.medico_especialista = medico_especialista;
 	}
 
 

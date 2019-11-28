@@ -67,11 +67,12 @@ public class CrearEPSController {
 		String EPSname = txtFldName.getText();
 		double activos = Integer.parseInt(txtFldActivos.getText());
 
-		Main.getEPS().setNombre(EPSname);
+		
 		if (activos < 1000000000) {
 			throw new MinimunActivesException(
 					"El valor de activos no es valido para la iniciacion del sistema de una EPS");
 		}else {
+			Main.getEPS().setNombre(EPSname);
 			Main.getEPS().setCaraterEconomico(activos);
 		}
 		

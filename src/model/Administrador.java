@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
+
 import excepciones.IncorrectPassWordException;
 
-public class Administrador {
+public class Administrador implements Serializable{
 	
 	//Attributes
 	/**

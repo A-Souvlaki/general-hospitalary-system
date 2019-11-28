@@ -1,29 +1,28 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
-public class Comun extends Medicamento {
+public class Comun extends Medicamento implements Serializable {
 
 	private Comun izq;
 	private Comun der;
 
-	private StringProperty principio;
+	private String principio;
 
 	public Comun(String id, String codigo, String nombre, String principioActivo) {
 		super(id, codigo, nombre);
-		this.principio = new SimpleStringProperty(principioActivo);
+		this.principio = principioActivo;
 
 	}
 
 	public String getPrincipio() {
-		return principio.get();
+		return principio;
 	}
 
 	public void setPrincipio(String principio) {
-		this.principio.set(principio);
+		this.principio = principio;
 	}
 
 	public void insertar(Comun nuevo) {
